@@ -18,7 +18,7 @@ This repository provides an interactive and automated Bash script to install and
 - Open ports: `22`, `40400`, `8080`
 - The following information:
   - `ETHEREUM_RPC_URL`: Your Ethereum Sepolia RPC URL
-  - `CONSENSUS_BEACON_URL`: Your sepolia Beacon URL
+  - `CONSENSUS_BEACON_URL`: Your Sepolia Beacon URL
   - `VALIDATOR_PRIVATE_KEY`: Your wallet private key
   - `COINBASE`: Your wallet address to receive rewards
   - `P2P_IP`: Your public IP address for peer-to-peer communication
@@ -57,18 +57,26 @@ docker ps
 ```bash
 docker logs -f aztec-sequencer
 ```
-### 6. go to Discord
 
-```curl -s -X POST -H 'Content-Type: application/json' \
+### 6. Query your node via RPC
+
+Check the latest proven block number:
+
+```bash
+curl -s -X POST -H 'Content-Type: application/json' \
 -d '{"jsonrpc":"2.0","method":"node_getL2Tips","params":[],"id":67}' \
-http://localhost:8080 | jq -r ".result.proven.number"```
+http://localhost:8080 | jq -r ".result.proven.number"
+```
 
-```curl -s -X POST -H 'Content-Type: application/json' \
+Get archive sibling path for a specific block number:
+
+```bash
+curl -s -X POST -H 'Content-Type: application/json' \
 -d '{"jsonrpc":"2.0","method":"node_getArchiveSiblingPath","params":["BLOCK_NUMBER","BLOCK_NUMBER"],"id":67}' \
-http://localhost:8080 | jq -r ".result"```
+http://localhost:8080 | jq -r ".result"
+```
 
-
-### . 🔐 Security Notes
+## 🔐 Security Notes
 
 - Your `.env` file contains sensitive information such as your private key. **Do not share it publicly.**
 - The default data path in Docker is `/root/.aztec/alpha-testnet/data/`. You may change this path as needed in `docker-compose.yml`.
