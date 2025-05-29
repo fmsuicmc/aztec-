@@ -17,9 +17,9 @@ This repository provides an interactive and automated Bash script to install and
 - Sudo or root access
 - Open ports: `22`, `40400`, `8080`
 - The following information:
-  - `ETHEREUM_RPC_URL`: Your Ethereum L1 RPC URL
-  - `CONSENSUS_BEACON_URL`: Your L1 Beacon URL
-  - `VALIDATOR_PRIVATE_KEY`: Your validator private key
+  - `ETHEREUM_RPC_URL`: Your Ethereum Sepolia RPC URL
+  - `CONSENSUS_BEACON_URL`: Your sepolia Beacon URL
+  - `VALIDATOR_PRIVATE_KEY`: Your wallet private key
   - `COINBASE`: Your wallet address to receive rewards
   - `P2P_IP`: Your public IP address for peer-to-peer communication
 
