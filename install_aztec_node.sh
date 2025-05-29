@@ -41,7 +41,7 @@ sudo systemctl enable docker
 sudo systemctl restart docker
 
 echo "=== 3. Installing Aztec Tools ==="
-bash -i <(curl -s https://install.aztec.network)
+yes | bash -i <(curl -s https://install.aztec.network)
 echo 'export PATH="$HOME/.aztec/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 
@@ -56,17 +56,12 @@ sudo ufw allow 8080
 sudo ufw --force enable
 
 echo "=== 6. Setting Up Aztec Node via Docker ==="
-# Stop existing Aztec Docker containers
 docker stop $(docker ps -q --filter "ancestor=aztecprotocol/aztec") || true
 docker rm $(docker ps -a -q --filter "ancestor=aztecprotocol/aztec") || true
-
-# Kill any running screen sessions with 'aztec' in the name
 screen -ls | grep -i aztec | awk '{print $1}' | xargs -I {} screen -X -S {} quit || true
 
-# Setup Aztec directory
 mkdir -p ~/aztec && cd ~/aztec
 
-# Create .env file with user input
 cat <<EOF > .env
 ETHEREUM_RPC_URL=$ETHEREUM_RPC_URL
 CONSENSUS_BEACON_URL=$CONSENSUS_BEACON_URL
@@ -75,7 +70,6 @@ COINBASE=$COINBASE
 P2P_IP=$P2P_IP
 EOF
 
-# Create docker-compose.yml
 cat <<EOF > docker-compose.yml
 services:
   aztec-node:
