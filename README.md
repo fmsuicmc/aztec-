@@ -68,7 +68,7 @@ http://localhost:8080 | jq -r ".result.proven.number"```
 http://localhost:8080 | jq -r ".result"```
 
 
-## 🔐 Security Notes
+### . 🔐 Security Notes
 
 - Your `.env` file contains sensitive information such as your private key. **Do not share it publicly.**
 - The default data path in Docker is `/root/.aztec/alpha-testnet/data/`. You may change this path as needed in `docker-compose.yml`.
