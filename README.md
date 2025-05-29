@@ -1,106 +1,106 @@
 # Aztec Node Installer (Interactive & Dockerized)
 
-این ریپازیتوری شامل یک اسکریپت Bash تعاملی برای نصب و راه‌اندازی نود Sequencer شبکه Aztec بر روی سیستم‌های مبتنی بر Ubuntu است. اسکریپت به‌صورت خودکار وابستگی‌ها را نصب کرده، Docker را پیکربندی می‌کند، ابزارهای Aztec را نصب می‌کند، و نود را با استفاده از Docker Compose اجرا می‌کند.
+This repository provides an interactive and automated Bash script to install and run an Aztec Sequencer node on Ubuntu-based systems. The script installs required dependencies, configures Docker, installs Aztec tools, and launches the node via Docker Compose.
 
-## ⚙️ ویژگی‌ها
+## ⚙️ Features
 
-- نصب خودکار وابستگی‌های سیستم
-- نصب و پیکربندی امن Docker
-- دریافت تعاملی اطلاعات مورد نیاز از کاربر
-- ایجاد خودکار فایل‌های `.env` و `docker-compose.yml`
-- راه‌اندازی نود Aztec با استفاده از Docker
-- پیکربندی فایروال و باز کردن پورت‌های مورد نیاز
+- Automated installation of system dependencies
+- Secure Docker installation and setup
+- Interactive prompts for required input values
+- Auto-generation of `.env` and `docker-compose.yml`
+- Node deployment using Docker
+- Firewall configuration and required port setup
 
-## 🖥️ پیش‌نیازها
+## 🖥️ Requirements
 
-- سیستم‌عامل Ubuntu 20.04 یا بالاتر
-- دسترسی به کاربر `sudo` یا `root`
-- پورت‌های باز `22`, `40400`, `8080`
-- اطلاعات زیر:
-  - `ETHEREUM_RPC_URL`: آدرس RPC لایه ۱
-  - `CONSENSUS_BEACON_URL`: آدرس Beacon لایه ۱
-  - `VALIDATOR_PRIVATE_KEY`: کلید خصوصی اعتبارسنج
-  - `COINBASE`: آدرس کیف پول برای دریافت پاداش
-  - `P2P_IP`: آدرس IP عمومی سرور
+- Ubuntu 20.04 or later
+- Sudo or root access
+- Open ports: `22`, `40400`, `8080`
+- The following information:
+  - `ETHEREUM_RPC_URL`: Your Ethereum L1 RPC URL
+  - `CONSENSUS_BEACON_URL`: Your L1 Beacon URL
+  - `VALIDATOR_PRIVATE_KEY`: Your validator private key
+  - `COINBASE`: Your wallet address to receive rewards
+  - `P2P_IP`: Your public IP address for peer-to-peer communication
 
-## 🚀 شروع سریع
+## 🚀 Quick Start
 
-### 1. کلون کردن ریپازیتوری
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/fmsuicmc/aztec-.git
 cd aztec-
 ```
 
-### 2. اجرایی کردن اسکریپت
+### 2. Make the script executable
 
 ```bash
 chmod +x install_aztec_node.sh
 ```
 
-### 3. اجرای اسکریپت
+### 3. Run the script
 
 ```bash
 ./install_aztec_node.sh
 ```
 
-در حین اجرا، اسکریپت از شما اطلاعات مورد نیاز را دریافت کرده و فایل‌های پیکربندی را ایجاد می‌کند.
+You will be prompted to input your node credentials and configuration values. The script will then create the `.env` and `docker-compose.yml` files automatically.
 
-### 4. بررسی وضعیت نود
+### 4. Check if the node is running
 
 ```bash
 docker ps
 ```
 
-### 5. مشاهده لاگ‌ها
+### 5. View logs
 
 ```bash
 docker logs -f aztec-sequencer
 ```
 
-## 🔐 نکات امنیتی
+## 🔐 Security Notes
 
-- فایل `.env` حاوی اطلاعات حساس مانند کلید خصوصی است. لطفاً این فایل را به‌صورت عمومی به‌اشتراک نگذارید.
-- مسیر داده‌های نود در Docker به `/root/.aztec/alpha-testnet/data/` تنظیم شده است. در صورت نیاز می‌توانید این مسیر را تغییر دهید.
+- Your `.env` file contains sensitive information such as your private key. **Do not share it publicly.**
+- The default data path in Docker is `/root/.aztec/alpha-testnet/data/`. You may change this path as needed in `docker-compose.yml`.
 
-## 🛠️ به‌روزرسانی نود
+## 🛠️ Updating the Node
 
-برای به‌روزرسانی نود، مراحل زیر را دنبال کنید:
+To update your node:
 
-1. توقف نود:
+1. Stop the node:
 
 ```bash
 docker compose down
 ```
 
-2. به‌روزرسانی ابزارهای Aztec:
+2. Update Aztec tools:
 
 ```bash
 aztec-up alpha-testnet
 ```
 
-3. حذف داده‌های قدیمی (در صورت نیاز):
+3. (Optional) Clear old data:
 
 ```bash
 rm -rf ~/.aztec/alpha-testnet/data/
 ```
 
-4. اجرای مجدد نود:
+4. Restart the node:
 
 ```bash
 docker compose up -d
 ```
 
-## 📚 منابع مفید
+## 📚 Useful Resources
 
-- [مستندات رسمی Aztec](https://docs.aztec.network/)
-- [راهنمای اجرای نود Sequencer](https://docs.aztec.network/the_aztec_network/guides/run_nodes/how_to_run_sequencer)
-- [انجمن Aztec در Discord](https://discord.gg/aztec)
+- [Aztec Documentation](https://docs.aztec.network/)
+- [How to Run a Sequencer](https://docs.aztec.network/the_aztec_network/guides/run_nodes/how_to_run_sequencer)
+- [Aztec Discord Community](https://discord.gg/aztec)
 
-## 📄 مجوز
+## 📄 License
 
 MIT © 2025 [fmsuicmc](https://github.com/fmsuicmc)
 
 ---
 
-> برای سوالات یا مشکلات، لطفاً یک Issue در ریپازیتوری ایجاد کنید یا از طریق Discord با ما در ارتباط باشید.
+> Need help? Open an issue or ask in the Aztec Discord!
