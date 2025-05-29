@@ -122,3 +122,29 @@ MIT © 2025 [fmsuicmc](https://github.com/fmsuicmc)
 ---
 
 > Need help? Open an issue or ask in the Aztec Discord!
+
+
+## 🧾 Register Validator
+
+**Step 11: Register your validator** after your Sequencer node is fully synced.
+
+Make sure your node is running and synced before proceeding.
+
+```bash
+aztec add-l1-validator \
+  --l1-rpc-urls RPC_URL \
+  --private-key your-private-key \
+  --attester your-validator-address \
+  --proposer-eoa your-validator-address \
+  --staking-asset-handler 0xF739D03e98e23A7B65940848aBA8921fF3bAc4b2 \
+  --l1-chain-id 11155111
+```
+
+Replace:
+- `RPC_URL` with your Sepolia L1 RPC
+- `your-private-key` with your wallet's private key
+- `your-validator-address` with your wallet address (used twice)
+
+📌 **Note:**  
+- There is a **daily limit of 5 validator registrations**. If you receive an error, please try again the next day.  
+- If registration succeeds, you can monitor your validator on [Aztec Scan](https://aztec.network).
